@@ -13,6 +13,7 @@ Template.roomList.helpers({
 				merge channels into one list
 				show favorites
 				show unread
+				show direct unread on top
 		*/
 		if (this.anonymous) {
 			return Rooms.find({ t: 'c' }, { sort: { name: 1 } });
@@ -23,6 +24,7 @@ Template.roomList.helpers({
 				'settings.preferences.sidebarSortby': 1,
 				'settings.preferences.sidebarShowFavorites': 1,
 				'settings.preferences.sidebarShowUnread': 1,
+				'settings.preferences.sidebarShowDirectUnread': 1,
 				'settings.preferences.sidebarShowDiscussion': 1,
 				'services.tokenpass': 1,
 			},
@@ -43,6 +45,17 @@ Template.roomList.helpers({
 
 		if (this.identifier === 'unread') {
 			query.alert = true;
+			query.$or = [
+				{ hideUnreadStatus: { $ne: true } },
+				{ unread: { $gt: 0 } },
+			];
+
+			return ChatSubscription.find(query, { sort });
+		}
+
+		if (this.identifier === 'unreadDirectMessages') {
+			query.alert = true;
+			query.t = { $in: ['d'] };
 			query.$or = [
 				{ hideUnreadStatus: { $ne: true } },
 				{ unread: { $gt: 0 } },

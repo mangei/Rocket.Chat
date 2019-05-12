@@ -19,6 +19,9 @@ const checked = function(prop, field) {
 	if (prop === 'sidebarShowUnread') {
 		return getUserPreference(userId, 'sidebarShowUnread');
 	}
+	if (prop === 'sidebarShowDirectUnread') {
+		return getUserPreference(userId, 'sidebarShowDirectUnread');
+	}
 	if (prop === 'sidebarSortby') {
 		return (getUserPreference(userId, 'sidebarSortby') || 'alphabetical') === field;
 	}

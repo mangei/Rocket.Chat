@@ -22,7 +22,7 @@ Template.sideNav.helpers({
 	},
 
 	roomType() {
-		return roomTypes.getTypes().map((roomType) => ({
+		const otherRoomTypes =  roomTypes.getTypes().map((roomType) => ({
 			template: roomType.customTemplate || 'roomList',
 			data: {
 				header: roomType.header,
@@ -31,6 +31,16 @@ Template.sideNav.helpers({
 				label: roomType.label,
 			},
 		}));
+		 const directUnreadRoomType = {
+			 template: roomType.customTemplate || 'roomList',
+			 data: {
+				 header: 'Unread Direct Messages',
+				 identifier: 'unreadDirectMessages',
+				 isCombined: roomType.isCombined,
+				 label: 'Unread Direct Messages',
+			 },
+		 }
+		 return [directUnreadRoomType, ...otherRoomTyes];
 	},
 
 	loggedInUser() {

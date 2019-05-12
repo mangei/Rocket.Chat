@@ -61,5 +61,17 @@
 				</label>
 			</li>
 		</ul>
+		<span class="rc-popover__divider"></span>
+		<ul class="rc-popover__list">
+			<li class="rc-popover__item {{bold 'sidebarShowDirectUnread'}}">
+				<label class="rc-popover__label">
+					<input type="checkbox" name="sidebarShowDirectUnread" class="hidden" checked="{{checked 'sidebarShowDirectUnread'}}">
+					<span class="rc-popover__icon">
+						{{> icon block="rc-popover__icon-element" icon='eye-off' }}
+					</span>
+					<span class="rc-popover__item-text">{{ _"Direct_unread_on_top"}}</span>
+				</label>
+			</li>
+		</ul>
 	</div>
 </template>
